@@ -9,17 +9,26 @@ class Paslauga(models.Model):
     def __str__(self):
         return self.name
 
-class Automobilis(models.Model):
+class AutomobilioModelis(models.Model):
     marke = models.CharField('Marke', max_length=200)
     modelis = models.CharField('Marke', max_length=200)
 
     def __str__(self):
         return f"{self.marke} {self.modelis}"
 
+class Automobilis(models.Model):
+    klientas = models.CharField('Klientas', max_length=200, null=True)
+    automobilis_id = models.ForeignKey('AutomobilioModelis', on_delete=models.SET_NULL, null=True)
+    valstybinis_numeris = models.CharField('Valstybinis numeris', max_length=200, null=True)
+    vin_kodas = models.CharField('VIN kodas', max_length=200, null=True)
+
+    def __str__(self):
+        return f"{self.klientas} {self.automobilis_id} {self.valstybinis_numeris} {self.vin_kodas}"
+
 
 class Paslaugos_kaina(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
-    automobiliai_ids = models.ManyToManyField(Automobilis)
+    automobiliai_ids = models.ManyToManyField(AutomobilioModelis)
     kaina = models.FloatField("Kaina")
 
     def __str__(self):
@@ -27,12 +36,11 @@ class Paslaugos_kaina(models.Model):
 
 
 class Uzsakymas(models.Model):
-    klientas = models.CharField('Klientas', max_length=200)
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
     suma = models.FloatField("Suma")
 
     def __str__(self):
-        return f"{self.klientas}, {self.suma}"
+        return f"{self.automobilis_id}, {self.suma}"
 
 class UzsakymoEilute(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
