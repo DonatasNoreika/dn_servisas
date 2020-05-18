@@ -31,6 +31,11 @@ class Paslaugos_kaina(models.Model):
     automobiliai_ids = models.ManyToManyField(AutomobilioModelis)
     kaina = models.FloatField("Kaina")
 
+    def display_automobiliai(self):
+        return ', '.join(f"{auto.marke} {auto.modelis}" for auto in self.automobiliai_ids.all()[:3])
+
+    display_automobiliai.short_description = 'Automobiliai'
+
     def __str__(self):
         return f"{self.paslauga_id.name}: {self.kaina}"
 
