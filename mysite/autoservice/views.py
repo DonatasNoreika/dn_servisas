@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Paslauga, Paslaugos_kaina, AutomobilioModelis, Uzsakymas, UzsakymoEilute, Automobilis
 
@@ -29,3 +29,8 @@ def uzsakymai(request):
         'uzsakymai': uzsakymai
     }
     return render(request, 'uzsakymai.html', context=context)
+
+
+def uzsakymas(request, uzsakymas_id):
+    uzsakymas = get_object_or_404(Uzsakymas, pk=uzsakymas_id)
+    return render(request, 'uzsakymas.html', {'uzsakymas': uzsakymas})

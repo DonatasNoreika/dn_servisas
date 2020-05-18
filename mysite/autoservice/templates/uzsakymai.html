@@ -9,6 +9,7 @@
     <li><strong>Automobilis:</strong> {{ a.automobilis_id }}</li>
     <li><strong>Suma:</strong> {{ a.suma }}</li>
     <li><strong>Statusas:</strong> {{ a.status }}</li>
+    <a class="btn btn-primary" href="{% url 'uzsakymas' a.id %}" role="button">Peržiūrėti</a>
   </ul>
     {% endfor %}
 {% endblock %}

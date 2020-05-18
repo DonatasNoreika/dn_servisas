@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container author">
+  <h1>Užsakymas Nr. <span>{{ uzsakymas.id }}</span></h1>
+  <p>Informacija:</p>
+    <ul>
+        <li><strong>Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
+        <li><strong>Suma:</strong> {{ uzsakymas.suma }}</li>
+        <li><strong>Statusas:</strong> {{ uzsakymas.status }}</li>
+    </ul>
+</div>
+{% endblock %}
