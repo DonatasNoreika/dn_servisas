@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Automobilių sąrašas</h1>
+  {% if automobiliai %}
+  <ul>
+    {% for auto in automobiliai %}
+      <li>
+        <a href="{{ auto.id }}">{{ auto.automobilis_id }}</a> ({{auto.klientas}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Automobilių nėra.</p>
+  {% endif %}
+{% endblock %}

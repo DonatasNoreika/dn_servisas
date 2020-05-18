@@ -33,8 +33,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'uzsakymai' %}">Užsakymai</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'automobiliai' %}">Automobiliai</a>
+        </li>
       </ul>
-        <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="#">
               <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
