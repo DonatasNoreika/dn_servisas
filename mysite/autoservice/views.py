@@ -21,3 +21,11 @@ def index(request):
 
     # renderiname index.html, su duomenimis kintamąjame context
     return render(request, 'index.html', context=context)
+
+
+def uzsakymai(request):
+    uzsakymai = Uzsakymas.objects.all()
+    context = {
+        'uzsakymai': uzsakymai
+    }
+    return render(request, 'uzsakymai.html', context=context)

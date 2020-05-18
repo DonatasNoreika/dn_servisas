@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Užsakymai</h1>
+  <p>Mūsų serviso užsakymai:</p>
+  {% for a in uzsakymai %}
+<hr>
+  <ul>
+    <li><strong>Automobilis:</strong> {{ a.automobilis_id }}</li>
+    <li><strong>Suma:</strong> {{ a.suma }}</li>
+    <li><strong>Statusas:</strong> {{ a.status }}</li>
+  </ul>
+    {% endfor %}
+{% endblock %}
