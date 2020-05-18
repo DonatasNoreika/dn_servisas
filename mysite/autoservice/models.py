@@ -38,6 +38,20 @@ class Paslaugos_kaina(models.Model):
 class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
     suma = models.FloatField("Suma")
+    STATUS = (
+        ('p', 'Priimtas'),
+        ('v', 'Vykdomas'),
+        ('a', 'Atliktas'),
+        ('t', 'Atšauktas'),
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS,
+        blank=True,
+        default='p',
+        help_text='Statusas',
+    )
 
     def __str__(self):
         return f"{self.automobilis_id}, {self.suma}"
