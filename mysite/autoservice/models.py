@@ -9,12 +9,20 @@ class Paslauga(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Paslauga'
+        verbose_name_plural = 'Paslaugos'
+
 class AutomobilioModelis(models.Model):
     marke = models.CharField('Marke', max_length=200)
     modelis = models.CharField('Marke', max_length=200)
 
     def __str__(self):
         return f"{self.marke} {self.modelis}"
+
+    class Meta:
+        verbose_name = 'Automobilio modelis'
+        verbose_name_plural = 'Automobilio modeliai'
 
 class Automobilis(models.Model):
     klientas = models.CharField('Klientas', max_length=200, null=True)
@@ -24,6 +32,10 @@ class Automobilis(models.Model):
 
     def __str__(self):
         return f"{self.klientas} {self.automobilis_id} {self.valstybinis_numeris} {self.vin_kodas}"
+
+    class Meta:
+        verbose_name = 'Automobilis'
+        verbose_name_plural = 'Automobiliai'
 
 
 class Paslaugos_kaina(models.Model):
@@ -38,6 +50,10 @@ class Paslaugos_kaina(models.Model):
 
     def __str__(self):
         return f"{self.paslauga_id.name}: {self.kaina}"
+
+    class Meta:
+        verbose_name = 'Paslaugų kaina'
+        verbose_name_plural = 'Paslaugų kainos'
 
 
 class Uzsakymas(models.Model):
@@ -61,6 +77,10 @@ class Uzsakymas(models.Model):
     def __str__(self):
         return f"{self.automobilis_id}, {self.suma}"
 
+    class Meta:
+        verbose_name = 'Užsakymas'
+        verbose_name_plural = 'Užsakymai'
+
 class UzsakymoEilute(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
     uzsakymas_id = models.ForeignKey('Uzsakymas', related_name="Eilutės", on_delete=models.SET_NULL, null=True)
@@ -69,3 +89,7 @@ class UzsakymoEilute(models.Model):
 
     def __str__(self):
         return f"{self.paslauga_id.name}, {self.kaina}"
+
+    class Meta:
+        verbose_name = 'Užsakymo eilutė'
+        verbose_name_plural = 'Užsakymo eilutės'
