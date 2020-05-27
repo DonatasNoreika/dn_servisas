@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 
@@ -58,6 +59,8 @@ class Paslaugos_kaina(models.Model):
 
 class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
+    klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    grazinimo_laikas = models.DateTimeField('Gražinimo terminas', null=True, blank=True)
     suma = models.FloatField("Suma")
     STATUS = (
         ('p', 'Priimtas'),
@@ -65,6 +68,12 @@ class Uzsakymas(models.Model):
         ('a', 'Atliktas'),
         ('t', 'Atšauktas'),
     )
+
+    @property
+    def pasibaige_terminas(self):
+        if self.grazinimo_laikas and datetime.today() > self.grazinimo_laikas:
+            return True
+        return False
 
     status = models.CharField(
         max_length=1,

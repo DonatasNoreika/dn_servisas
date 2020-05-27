@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano užsakymai</h1>
+
+    {% if uzsakymas_list %}
+    <ul>
+
+      {% for uzsakymas in uzsakymas_list %}
+      <li>
+            <li><strong>Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
+            <li><strong>Suma:</strong> {{ uzsakymas.suma }}</li>
+            <li><strong>Statusas:</strong> {{ uzsakymas.status }}</li>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Nėra užsakymų.</p>
+    {% endif %}
+{% endblock %}

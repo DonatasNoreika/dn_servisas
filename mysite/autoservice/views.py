@@ -45,3 +45,14 @@ class AutomobilisView(generic.DetailView):
     model = Automobilis
     context_object_name = 'auto'
     template_name = 'automobilis.html'
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class UzsakymaiByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Uzsakymas
+    template_name = 'user_uzsakymai.html'
+
+    def get_queryset(self):
+        return Uzsakymas.objects.filter(klientas_id=self.request.user).order_by('grazinimo_laikas')
