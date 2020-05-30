@@ -92,9 +92,13 @@ class Uzsakymas(models.Model):
 
 class UzsakymoEilute(models.Model):
     paslauga_id = models.ForeignKey('Paslauga', on_delete=models.SET_NULL, null=True)
-    uzsakymas_id = models.ForeignKey('Uzsakymas', related_name="Eilutės", on_delete=models.SET_NULL, null=True)
+    uzsakymas_id = models.ForeignKey('Uzsakymas', related_name="eilutes", on_delete=models.SET_NULL, null=True)
     kiekis = models.IntegerField("Kiekis", null=True)
     kaina = models.FloatField("Kaina")
+
+    @property
+    def suma(self):
+        return self.kiekis * self.kaina
 
     def __str__(self):
         return f"{self.paslauga_id.name}, {self.kaina}"

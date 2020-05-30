@@ -3,6 +3,9 @@ from .models import Paslauga, Paslaugos_kaina, AutomobilioModelis, Uzsakymas, Uz
 
 # Register your models here.
 
+class UzsakymoEiluteAdmin(admin.ModelAdmin):
+    list_display = ('paslauga_id', 'uzsakymas_id', 'kiekis', 'kaina')
+
 class UzsakymoEiluteInLine(admin.TabularInline):
     model = UzsakymoEilute
 
@@ -24,4 +27,4 @@ admin.site.register(Paslaugos_kaina, Paslaugos_kainaAdmin)
 admin.site.register(AutomobilioModelis)
 admin.site.register(Automobilis, AutomobilisAdmin)
 admin.site.register(Uzsakymas, UzsakymasAdmin)
-admin.site.register(UzsakymoEilute)
+admin.site.register(UzsakymoEilute, UzsakymoEiluteAdmin)

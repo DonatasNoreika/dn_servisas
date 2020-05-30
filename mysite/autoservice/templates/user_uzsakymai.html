@@ -7,7 +7,7 @@
     <ul>
 
       {% for uzsakymas in uzsakymas_list %}
-      <li>
+      <li class="{% if uzsakymas.pasibaige_terminas %}text-danger{% endif %}">
             <li><strong>Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
             <li><strong>Suma:</strong> {{ uzsakymas.suma }}</li>
             <li><strong>Statusas:</strong> {{ uzsakymas.status }}</li>
