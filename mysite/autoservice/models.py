@@ -61,13 +61,22 @@ class Uzsakymas(models.Model):
     automobilis_id = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
     klientas_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     grazinimo_laikas = models.DateTimeField('Gražinimo terminas', null=True, blank=True)
-    suma = models.FloatField("Suma")
+    # suma = models.FloatField("Suma")
     STATUS = (
         ('p', 'Priimtas'),
         ('v', 'Vykdomas'),
         ('a', 'Atliktas'),
         ('t', 'Atšauktas'),
     )
+
+    @property
+    def suma(self):
+        eilutes = UzsakymoEilute.objects.filter(uzsakymas_id=self.pk)
+        suma = 0
+        for eilute in eilutes:
+            eilutes_suma = eilute.kiekis * eilute.kaina
+            suma += eilutes_suma
+        return suma
 
     @property
     def pasibaige_terminas(self):
