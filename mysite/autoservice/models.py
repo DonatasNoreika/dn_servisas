@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.utils.translation import gettext as _
 
 # Create your models here.
 
@@ -15,8 +16,8 @@ class Paslauga(models.Model):
         verbose_name_plural = 'Paslaugos'
 
 class AutomobilioModelis(models.Model):
-    marke = models.CharField('Marke', max_length=200)
-    modelis = models.CharField('Marke', max_length=200)
+    marke = models.CharField(_('Make'), max_length=200)
+    modelis = models.CharField(_('Model'), max_length=200)
 
     def __str__(self):
         return f"{self.marke} {self.modelis}"
