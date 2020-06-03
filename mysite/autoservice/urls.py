@@ -8,5 +8,7 @@ urlpatterns = [
     path('uzsakymai/<int:uzsakymas_id>', views.uzsakymas, name='uzsakymas'),
     path('automobiliai/', views.AutomobiliaiView.as_view(), name='automobiliai'),
     path('automobiliai/<int:pk>', views.AutomobilisView.as_view(), name='automobilis'),
-    path('manouzsakymai/', views.UzsakymaiByUserListView.as_view(), name='mano-uzsakymai')
+    path('manouzsakymai/', views.UzsakymaiByUserListView.as_view(), name='mano-uzsakymai'),
+    path('manouzsakymai/<int:pk>', views.UzsakymaiByUserDetailView.as_view(), name='mano-uzsakymas'),
+    path('manouzsakymai/new', views.UzsakymaiByUserCreateView.as_view(), name='mano-uzsakymas-create')
 ]

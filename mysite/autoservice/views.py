@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.views import generic
+from django.views.generic import (ListView,
+                                  DetailView,
+                                  CreateView,
+)
+
 from .models import Paslauga, Paslaugos_kaina, AutomobilioModelis, Uzsakymas, UzsakymoEilute, Automobilis
 
 
@@ -36,12 +40,12 @@ def uzsakymas(request, uzsakymas_id):
     uzsakymas = get_object_or_404(Uzsakymas, pk=uzsakymas_id)
     return render(request, 'uzsakymas.html', {'uzsakymas': uzsakymas})
 
-class AutomobiliaiView(generic.ListView):
+class AutomobiliaiView(ListView):
     model = Automobilis
     context_object_name = 'automobiliai'
     template_name = 'automobiliai.html'
 
-class AutomobilisView(generic.DetailView):
+class AutomobilisView(DetailView):
     model = Automobilis
     context_object_name = 'auto'
     template_name = 'automobilis.html'
@@ -50,9 +54,23 @@ class AutomobilisView(generic.DetailView):
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class UzsakymaiByUserListView(LoginRequiredMixin, generic.ListView):
+class UzsakymaiByUserListView(LoginRequiredMixin, ListView):
     model = Uzsakymas
     template_name = 'user_uzsakymai.html'
 
     def get_queryset(self):
         return Uzsakymas.objects.filter(klientas_id=self.request.user).order_by('grazinimo_laikas')
+
+class UzsakymaiByUserDetailView(LoginRequiredMixin, DetailView):
+    model = Uzsakymas
+    template_name = 'user_uzsakymas.html'
+
+class UzsakymaiByUserCreateView(LoginRequiredMixin, CreateView):
+    model = Uzsakymas
+    fields = ['automobilis_id', 'grazinimo_laikas']
+    template_name = 'uzsakymas_form.html'
+
+    def form_valid(self, form):
+        form.instance.klientas_id = self.request.user
+        return super().form_valid(form)
+

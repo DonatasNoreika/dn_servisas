@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano užsakymas:</h1>
+    <hr>
+    <ul>
+            <li><strong class="{% if object.pasibaige_terminas %}text-danger{% endif %}">Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
+            <li><strong>Suma:</strong> {{ object.suma }}</li>
+            <li><strong>Statusas:</strong> {{ object.status }}</li>
+    </ul>
+{% endblock %}

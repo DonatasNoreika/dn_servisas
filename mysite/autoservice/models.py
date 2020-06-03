@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+import pytz
 from django.utils.translation import gettext as _
+from django.urls import reverse
 
+utc = pytz.UTC
 # Create your models here.
 
 class Paslauga(models.Model):
@@ -81,7 +84,7 @@ class Uzsakymas(models.Model):
 
     @property
     def pasibaige_terminas(self):
-        if self.grazinimo_laikas and datetime.today() > self.grazinimo_laikas:
+        if self.grazinimo_laikas and datetime.today().replace(tzinfo=utc) > self.grazinimo_laikas.replace(tzinfo=utc):
             return True
         return False
 
@@ -95,6 +98,9 @@ class Uzsakymas(models.Model):
 
     def __str__(self):
         return f"{self.automobilis_id}, {self.suma}"
+
+    def get_absolute_url(self):
+        return reverse('mano-uzsakymas', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Užsakymas'

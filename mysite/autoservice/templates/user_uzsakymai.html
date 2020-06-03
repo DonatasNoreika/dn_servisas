@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Mano užsakymai</h1>
-
+    <h1>Mano užsakymai:</h1>
     {% if uzsakymas_list %}
-    <ul>
-
       {% for uzsakymas in uzsakymas_list %}
-      <li class="{% if uzsakymas.pasibaige_terminas %}text-danger{% endif %}">
-            <li><strong>Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
+    <hr>
+    <ul>
+            <li><strong class="{% if uzsakymas.pasibaige_terminas %}text-danger{% endif %}">Automobilis:</strong> {{ uzsakymas.automobilis_id }}</li>
             <li><strong>Suma:</strong> {{ uzsakymas.suma }}</li>
             <li><strong>Statusas:</strong> {{ uzsakymas.status }}</li>
-      </li>
-      {% endfor %}
+            <br/>
+            <a class="btn btn-primary" href="{{ uzsakymas.id }}" role="button">Peržiūrėti</a>
     </ul>
-
+      {% endfor %}
     {% else %}
       <p>Nėra užsakymų.</p>
     {% endif %}
